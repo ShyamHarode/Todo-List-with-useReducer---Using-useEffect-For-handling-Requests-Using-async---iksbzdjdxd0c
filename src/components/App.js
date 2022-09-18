@@ -3,14 +3,17 @@ import { todoReducer } from '../reducers/todo';
 import '../styles/App.css';
 import { AddTodo } from './AddTodo';
 import { Todo } from './Todo';
+const initialState = { todos: [] };
 const App = () => {
-  const [state,dispatch] = useReducer(todoReducer,{/* Initial todo state array, could be an array for storing indivial todo objects */})
+  const [state,dispatch] = useReducer(todoReducer,initialState)
   
  
   return (
     <div id="main">
-      <AddTodo />
-     {/* Render list of Todo Components here */}
+      <AddTodo dispatch={dispatch} />
+      {state.todos.map((todo) => (
+        <Todo dispatch={dispatch} todo={todo} ></Todo>
+      ))}
     </div>
   )
 }
